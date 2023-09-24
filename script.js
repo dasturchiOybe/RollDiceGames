@@ -17,7 +17,7 @@ let currentScore, activePlayer = 0, score, playing;
 function init() {
   score0El.textContent = 0;
   score1El.textContent = 0;
-  dice.style.display = 'none';
+//   dice.style.display = 'none';
 
   document.getElementById(`current--${activePlayer}`).textContent = 0;
 
@@ -45,10 +45,8 @@ function switchPlayer() {
 // Start
 init();
 
-// Tosh tashlash
 btnRollDice.addEventListener('click', function () {
   if (playing) {
-    // Toshni aniqlash
     let random = Math.trunc(Math.random() * 6) + 1; // 1 ... 6
 
     dice.src = `./img/dice-${random}.png`;
@@ -59,13 +57,11 @@ btnRollDice.addEventListener('click', function () {
       document.getElementById(`current--${activePlayer}`).textContent =
         currentScore;
     } else {
-      // O'yinchini almashtirish
       switchPlayer();
     }
   }
 });
 
-// Ballni yeg'ish
 btnHold.addEventListener('click', function () {
   if (playing) {
     score[activePlayer] += currentScore;
@@ -83,10 +79,23 @@ btnHold.addEventListener('click', function () {
   }
 });
 
-// New game
 btnNewGame.addEventListener('click', init);
 
-if(html.style.width <= 400){
-    document.querySelector('#name--0').textContent = '1';
-    document.querySelector('#name--1').textContent = '2';
-}
+
+
+dice.addEventListener('click', () =>{
+    if (playing) {
+    let random = Math.trunc(Math.random() * 6) + 1; // 1 ... 6
+
+    dice.src = `./img/dice-${random}.png`;
+    dice.style.display = 'inline-block';
+
+    if (random !== 1) {
+      currentScore += random;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      switchPlayer();
+    }
+  }
+})
